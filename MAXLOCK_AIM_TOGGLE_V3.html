@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MAXLOCK AIM TOGGLE MENU V3</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="apple-touch-icon" href="https://i.imgur.com/3I92C7m.png">
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.4em;
+      margin-top: 30px;
+      color: #00ffee;
+      text-shadow: 0 0 15px #00ffff, 0 0 30px #00ffee;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffff; }
+      to { text-shadow: 0 0 30px #00ffee; }
+    }
+
+    .toggle-section {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 15px 20px;
+      border: 1px solid #00ffee;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 0 10px #00ffee;
+    }
+
+    .toggle-title {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+      color: #00ffd5;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 32px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0;
+      right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 32px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 24px; width: 24px;
+      left: 4px; bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #00ffee;
+      box-shadow: 0 0 10px #00ffee, 0 0 20px #00ffee;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    .status-text {
+      margin-top: 10px;
+      font-size: 0.95em;
+      opacity: 0.8;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.8em;
+      opacity: 0.4;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎯 MAXLOCK AIM V3 – BẬT / TẮT 🧸</h1>
+
+  <div class="toggle-section">
+    <div class="toggle-title">🚀 Auto Headshot Pro</div>
+    <label class="switch">
+      <input type="checkbox" id="autoHeadshot" onchange="updateStatus('autoHeadshot')">
+      <span class="slider"></span>
+    </label>
+    <div class="status-text" id="status-autoHeadshot"></div>
+  </div>
+
+  <div class="toggle-section">
+    <div class="toggle-title">🎯 Boost AimZone</div>
+    <label class="switch">
+      <input type="checkbox" id="boostAim" onchange="updateStatus('boostAim')">
+      <span class="slider"></span>
+    </label>
+    <div class="status-text" id="status-boostAim"></div>
+  </div>
+
+  <div class="toggle-section">
+    <div class="toggle-title">⚙️ Anti Lệch Kéo</div>
+    <label class="switch">
+      <input type="checkbox" id="antiLech" onchange="updateStatus('antiLech')">
+      <span class="slider"></span>
+    </label>
+    <div class="status-text" id="status-antiLech"></div>
+  </div>
+
+  <div class="toggle-section">
+    <div class="toggle-title">📌 Drag Súng</div>
+    <label class="switch">
+      <input type="checkbox" id="dragSung" onchange="updateStatus('dragSung')">
+      <span class="slider"></span>
+    </label>
+    <div class="status-text" id="status-dragSung"></div>
+  </div>
+
+  <div class="toggle-section">
+    <div class="toggle-title">🧠 Delay Control</div>
+    <label class="switch">
+      <input type="checkbox" id="delayControl" onchange="updateStatus('delayControl')">
+      <span class="slider"></span>
+    </label>
+    <div class="status-text" id="status-delayControl"></div>
+  </div>
+
+  <div class="toggle-section">
+    <div class="toggle-title">🛡️ Đầm Tâm & Hút Tâm</div>
+    <label class="switch">
+      <input type="checkbox" id="damTam" onchange="updateStatus('damTam')">
+      <span class="slider"></span>
+    </label>
+    <div class="status-text" id="status-damTam"></div>
+  </div>
+
+  <div class="footer">© 2025 PhthangRealife🧸 – MaxLock AimToggle Menu V3</div>
+
+  <script>
+    function updateStatus(id) {
+      const checked = document.getElementById(id).checked;
+      const status = document.getElementById("status-" + id);
+      status.innerText = checked ? "✅ Đã bật" : "❌ Đã tắt";
+      localStorage.setItem(id, checked);
+    }
+
+    // Khôi phục trạng thái khi tải lại trang
+    ["autoHeadshot", "boostAim", "antiLech", "dragSung", "delayControl", "damTam"].forEach(id => {
+      const saved = localStorage.getItem(id) === "true";
+      document.getElementById(id).checked = saved;
+      document.getElementById("status-" + id).innerText = saved ? "✅ Đã bật" : "❌ Đã tắt";
+    });
+  </script>
+</body>
+</html>
